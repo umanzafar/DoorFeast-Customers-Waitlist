@@ -55,20 +55,14 @@
   .brandbar{
     display:flex;
     align-items:center;
-    gap:14px;
-    margin-bottom:28px;
     justify-content:center;
+    margin-bottom:24px;
   }
-  .brandbar .door-icon{width:40px;height:40px;flex-shrink:0;}
-  .brandbar .wordmark{
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size:26px;
-    letter-spacing:-0.5px;
-    background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+  .brandbar .logo-img{
+    width:150px;
+    height:auto;
+    border-radius:14px;
+    box-shadow:0 14px 30px -10px rgba(0,0,0,0.55);
   }
 
   .card{
@@ -271,23 +265,7 @@
 <div class="wrap">
 
   <div class="brandbar">
-    <svg class="door-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 20 L62 14 L62 82 L30 82 Z" fill="url(#doorGrad)"/>
-      <circle cx="55" cy="50" r="2.6" fill="#5C0A0D"/>
-      <path d="M62 14 L74 20 L74 78 L62 82 Z" fill="url(#doorGrad2)"/>
-      <path d="M15 74 C 30 70, 40 66, 55 74 C 62 78, 68 76, 74 72" stroke="url(#doorGrad)" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <defs>
-        <linearGradient id="doorGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#F5D89E"/>
-          <stop offset="1" stop-color="#C9963F"/>
-        </linearGradient>
-        <linearGradient id="doorGrad2" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#C9963F"/>
-          <stop offset="1" stop-color="#9B6B22"/>
-        </linearGradient>
-      </defs>
-    </svg>
-    <span class="wordmark">DoorFeast</span>
+    <img src="logo.png" alt="DoorFeast — Fresh meals, delivered fast" class="logo-img">
   </div>
 
   <div class="card">
@@ -318,13 +296,14 @@
 
         <div class="question" data-step="4">
           <label class="qlabel">Which app/platform do you currently use to order food?</label>
+          <p class="qhint">Select all that apply</p>
           <div class="option-list" id="platformOptions">
-            <label class="option"><input type="radio" name="platform" value="Just Eat" required><span>Just Eat</span></label>
-            <label class="option"><input type="radio" name="platform" value="Uber Eats"><span>Uber Eats</span></label>
-            <label class="option"><input type="radio" name="platform" value="Deliveroo"><span>Deliveroo</span></label>
-            <label class="option"><input type="radio" name="platform" value="Foodhub"><span>Foodhub</span></label>
-            <label class="option"><input type="radio" name="platform" value="I call the takeaway directly"><span>I call the takeaway directly</span></label>
-            <label class="option"><input type="radio" name="platform" value="None"><span>None</span></label>
+            <label class="option"><input type="checkbox" name="platform" value="Just Eat"><span>Just Eat</span></label>
+            <label class="option"><input type="checkbox" name="platform" value="Uber Eats"><span>Uber Eats</span></label>
+            <label class="option"><input type="checkbox" name="platform" value="Deliveroo"><span>Deliveroo</span></label>
+            <label class="option"><input type="checkbox" name="platform" value="Foodhub"><span>Foodhub</span></label>
+            <label class="option"><input type="checkbox" name="platform" value="I call the takeaway directly"><span>I call the takeaway directly</span></label>
+            <label class="option"><input type="checkbox" name="platform" value="None"><span>None</span></label>
           </div>
         </div>
 
@@ -373,7 +352,7 @@
 
 <script>
   // 👉 Paste your Google Apps Script Web App URL here after deployment (see SETUP.md)
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb5ILZO_Ns4Vhv-eGP8j-VIb4byRq9AtHLZ54EEkzVKUScwA7baSonHVauBtQbDvCOzQ/exec' ;
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzb5ILZO_Ns4Vhv-eGP8j-VIb4byRq9AtHLZ54EEkzVKUScwA7baSonHVauBtQbDvCOzQ/exec";
 
   const otherCheck = document.getElementById('frustrationOtherCheck');
   const otherText = document.getElementById('frustrationOtherText');
@@ -390,6 +369,9 @@
     e.preventDefault();
     errorBanner.classList.remove('show');
 
+    const platforms = Array.from(document.querySelectorAll('input[name="platform"]:checked'))
+      .map(el => el.value);
+
     const frustrations = Array.from(document.querySelectorAll('input[name="frustration"]:checked'))
       .map(el => el.value === 'Other' && otherText.value.trim() ? `Other: ${otherText.value.trim()}` : el.value);
 
@@ -397,7 +379,7 @@
       name: document.getElementById('name').value.trim(),
       contact: document.getElementById('contact').value.trim(),
       area: document.getElementById('area').value.trim(),
-      platform: (document.querySelector('input[name="platform"]:checked') || {}).value || "",
+      platform: platforms.join(", "),
       frustrations: frustrations.join(", "),
       favoriteTakeaways: document.getElementById('favoriteTakeaways').value.trim(),
       wouldTry: (document.querySelector('input[name="wouldTry"]:checked') || {}).value || "",
