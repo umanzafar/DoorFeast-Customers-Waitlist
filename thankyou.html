@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're on the list — DoorFeast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red-deep:#5C0A0D;
+    --red-rich:#8B1116;
+    --gold-1:#F5D89E;
+    --gold-2:#C9963F;
+    --cream:#FBF4E6;
+    --ink:#2B1608;
+    --ink-soft:#5E4632;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:
+      radial-gradient(circle at 20% 0%, var(--red-rich) 0%, transparent 55%),
+      radial-gradient(circle at 100% 100%, var(--red-rich) 0%, transparent 50%),
+      var(--red-deep);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+    color:var(--cream);
+  }
+  .panel{
+    max-width:520px;
+    width:100%;
+    text-align:center;
+  }
+
+  .scene{
+    width:220px;
+    height:220px;
+    margin:0 auto 8px;
+    position:relative;
+  }
+  .scene svg{width:100%; height:100%;}
+
+  /* door swings open */
+  .door-slab{
+    transform-origin: 30px 20px;
+    animation: swing 1.1s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  @keyframes swing{
+    0%{ transform: rotate(0deg); }
+    100%{ transform: rotate(-38deg); }
+  }
+  /* cloche glides out through the doorway */
+  .cloche{
+    animation: glide 1.4s .5s cubic-bezier(.2,.8,.2,1) forwards;
+    opacity:0;
+  }
+  @keyframes glide{
+    0%{ transform: translateX(0) translateY(0); opacity:0; }
+    15%{ opacity:1; }
+    100%{ transform: translateX(38px) translateY(6px); opacity:1; }
+  }
+  /* trailing motion lines fade in after */
+  .speedlines{
+    animation: fadein .6s 1.5s forwards;
+    opacity:0;
+  }
+  @keyframes fadein{ to{ opacity:1; } }
+
+  h1{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:30px;
+    line-height:1.2;
+    margin:6px 0 14px;
+    background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  p.lead{
+    font-size:15.5px;
+    line-height:1.65;
+    color:#F1DCC4;
+    margin:0 0 20px;
+  }
+
+  .promise-card{
+    background:rgba(251,244,230,0.08);
+    border:1px solid rgba(245,216,158,0.3);
+    border-radius:16px;
+    padding:20px 22px;
+    margin:0 0 28px;
+    text-align:left;
+  }
+  .promise-card .row{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    font-size:14px;
+    color:#F1DCC4;
+    line-height:1.55;
+  }
+  .promise-card .row + .row{margin-top:14px;}
+  .promise-card .icon{
+    flex-shrink:0;
+    width:22px;height:22px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+    color:var(--red-deep);
+    font-weight:700;
+    font-size:12px;
+  }
+  .promise-card b{color:var(--gold-1);}
+
+  .code-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+    color:var(--red-deep);
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    padding:9px 18px;
+    border-radius:999px;
+    margin-bottom:30px;
+  }
+
+  .socials{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .socials a{
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1px solid rgba(245,216,158,0.35);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold-1);
+    text-decoration:none;
+    transition:background .15s, transform .15s;
+  }
+  .socials a:hover{background:rgba(245,216,158,0.12); transform:translateY(-2px);}
+  .socials svg{width:19px;height:19px;}
+
+  .footnote{
+    font-size:12px;
+    color:#C9A98A;
+  }
+  .footnote a{color:var(--gold-1);}
+
+  @media (max-width:480px){
+    h1{font-size:24px;}
+  }
+</style>
+</head>
+<body>
+<div class="panel">
+
+  <div class="scene">
+    <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#F5D89E"/>
+          <stop offset="1" stop-color="#C9963F"/>
+        </linearGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#C9963F"/>
+          <stop offset="1" stop-color="#9B6B22"/>
+        </linearGradient>
+      </defs>
+
+      <!-- frame -->
+      <rect x="60" y="30" width="14" height="160" rx="3" fill="url(#g2)"/>
+
+      <!-- door slab, swings open -->
+      <g class="door-slab">
+        <rect x="74" y="30" width="70" height="160" rx="4" fill="url(#g1)"/>
+        <circle cx="128" cy="112" r="3.4" fill="#5C0A0D"/>
+      </g>
+
+      <!-- path trailing from doorway -->
+      <path d="M40 178 C 65 172, 85 168, 110 176 C 125 181, 140 179, 155 172"
+            stroke="url(#g1)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85"/>
+
+      <!-- cloche gliding through doorway -->
+      <g class="cloche">
+        <rect x="70" y="128" width="44" height="6" rx="3" fill="url(#g2)"/>
+        <path d="M72 128 a20 18 0 0 1 40 0 Z" fill="url(#g1)"/>
+        <circle cx="92" cy="104" r="3" fill="url(#g1)"/>
+      </g>
+
+      <!-- speed lines -->
+      <g class="speedlines">
+        <rect x="18" y="98" width="20" height="4" rx="2" fill="url(#g1)"/>
+        <rect x="10" y="112" width="26" height="4" rx="2" fill="url(#g1)"/>
+        <rect x="20" y="126" width="16" height="4" rx="2" fill="url(#g1)"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1>You're on the list 🎉</h1>
+  <p class="lead">Thanks for joining the DoorFeast waitlist. You'll be one of the first to know when we open our doors in Stoke-on-Trent.</p>
+
+  <div class="promise-card">
+    <div class="row">
+      <span class="icon">✓</span>
+      <span>We'll <b>email you before public launch</b> so you get first access — before it's open to everyone else.</span>
+    </div>
+    <div class="row">
+      <span class="icon">✓</span>
+      <span>Your <b>£5 off your first order</b> code will be sent straight to your inbox at launch.</span>
+    </div>
+    <div class="row">
+      <span class="icon">✓</span>
+      <span>No spam — just launch updates, and nothing else.</span>
+    </div>
+  </div>
+
+  <div class="code-pill">🔥 £5 OFF is reserved for you</div>
+
+  <div class="socials">
+    <a href="#" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+    </a>
+    <a href="#" aria-label="Facebook" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>
+    </a>
+    <a href="#" aria-label="TikTok" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5c.2 0 .4 0 .5.03"/><path d="M14 4c.5 2.2 2.1 3.8 4 4"/></svg>
+    </a>
+  </div>
+
+  <p class="footnote">Changed your mind or made a mistake? <a href="index.html">Go back to the form</a>.</p>
+</div>
+</body>
+</html>
